@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"gin-simple.com/config"
-	"gin-simple.com/handlers"
+	"gin-simple.com/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -25,16 +25,8 @@ func main() {
 	// Initialize Gin
 	r := gin.Default()
 
-	userHandler := handlers.NewUserHandler(db)
-
-	v1 := r.Group("/api/v1")
-	{
-		v1.GET("/users", userHandler.GetAll)
-		v1.GET("/users/:id", userHandler.GetByID)
-		v1.POST("/users", userHandler.Create)
-		v1.PUT("/users/:id", userHandler.Update)
-		v1.DELETE("/users/:id", userHandler.Delete)
-	}
+	// Setup Routes
+	routes.SetupRoutes(r, db)
 
 	r.Run(":" + os.Getenv("PORT"))
 }
