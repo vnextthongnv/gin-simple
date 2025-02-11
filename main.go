@@ -20,9 +20,11 @@ func init() {
 func main() {
 	// Initialize DB
 	db := config.InitDB()
+
+	// deferDelays execution of the db.Close() function until the current function (main) finishes.
 	defer db.Close()
 
-	// Initialize Gin
+	// Initialize Gin Route
 	r := gin.Default()
 
 	// Setup Routes
