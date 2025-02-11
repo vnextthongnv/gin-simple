@@ -1,2 +1,2 @@
-- Gin
-- godotenv
+- Gin - Framework
+- godotenv - manage env variable
